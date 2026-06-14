@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickBite Food Ordering</title>
+    <style>
+        /* Replicates the Python Tkinter Window Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .order-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: #f4f4f5;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header-banner {
+            background-color: #e11d48;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .menu-frame {
+            border: 2px solid #e4e4e7;
+            border-radius: 6px;
+            margin: 15px;
+            padding: 15px;
+            background-color: #f4f4f5;
+        }
+        .menu-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #3f3f46;
+            margin-top: -25px;
+            background: #f4f4f5;
+            padding: 0 5px;
+            width: fit-content;
+        }
+        .menu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f4f4f5;
+        }
+        .item-label {
+            font-size: 14px;
+            color: #18181b;
+            flex-grow: 1;
+        }
+        .qty-container {
+            display: flex;
+            align-items: center;
+        }
+        .qty-label {
+            font-size: 13px;
+            color: #4b5563;
+            margin-right: 5px;
+        }
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            font-size: 14px;
+            padding: 2px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        .btn-frame {
+            text-align: center;
+            padding: 15px 0;
+        }
+        .btn-order {
+            background-color: #10b981;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-order:hover {
+            background-color: #059669;
+        }
+    </style>
+</head>
+<body>
+
+<div class="order-container">
+    <!-- Header Banner -->
+    <div class="header-banner">🍔 QUICKBITE MENU 🍕</div>
+
+    <!-- Menu Frame -->
+    <div class="menu-frame">
+        <div class="menu-title"> Select Items </div>
+        
+        <!-- Generated Menu Rows -->
+        <div class="menu-row">
+            <span class="item-label">KFC Style Chicken- ₹100.00</span>
+            <div class="qty-container">
+                <span class="qty-label">Qty:</span>
+                <input type="number" class="qty-input" data-item="KFC Style Chicken" data-price="100" value="0" min="0">
+            </div>
+        </div>
+
+        <div class="menu-row">
+            <span class="item-label">KFC Style Fish - ₹100.00</span>
+            <div class="qty-container">
+                <span class="qty-label">Qty:</span>
+                <input type="number" class="qty-input" data-item="KFC Style Fish" data-price="100" value="0" min="0">
+            </div>
+        </div>
+
+        <div class="menu-row">
+            <span class="item-label">Neluru Fish Pulusu - ₹100.00</span>
+            <div class="qty-container">
+                <span class="qty-label">Qty:</span>
+                <input type="number" class="qty-input" data-item="Neluru Fish Pulusu" data-price="100" value="0" min="0">
+            </div>
+        </div>
+
+        <div class="menu-row">
+            <span class="item-label">Chicken Curry - ₹130.00</span>
+            <div class="qty-container">
+                <span class="qty-label">Qty:</span>
+                <input type="number" class="qty-input" data-item="Chicken Curry" data-price="130" value="0" min="0">
+            </div>
+        </div>
+
+        <div class="menu-row">
+            <span class="item-label">Egg Curry - ₹60.00</span>
+            <div class="qty-container">
+                <span class="qty-label">Qty:</span>
+                <input type="number" class="qty-input" data-item="Egg Curry" data-price="60" value="0" min="0">
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Button Area -->
+    <div class="btn-frame">
+        <button class="btn-order" onclick="calculateTotal()">Place Order</button>
+    </div>
+</div>
+
+<script>
+    function calculateTotal() {
+        const inputs = document.querySelectorAll('.qty-input');
+        let receiptText = "--- Your Order Receipt ---\n\n";
+        let grandTotal = 0;
+        let itemsOrdered = false;
+
+        for (let input of inputs) {
+            let qtyStr = input.value.trim();
+            
+            // Skip unselected items
+            if (qtyStr === "0" || qtyStr === "") {
+                continue;
+            }
+
+            let qty = parseInt(qtyStr);
+            let itemPrice = parseFloat(input.getAttribute('data-price'));
+            let itemName = input.getAttribute('data-item');
+
+            // Input Validation: Check for invalid format or negative numbers
+            if (isNaN(qty) || qty < 0) {
+                alert(`Please enter a valid positive number for ${itemName}.`);
+                return;
+            }
+
+            if (qty > 0) {
+                let itemTotal = qty * itemPrice;
+                grandTotal += itemTotal;
+                receiptText += `${itemName} (x${qty}): ₹${itemTotal.toFixed(2)}\n`;
+                itemsOrdered = true;
+            }
+        }
+
+        // Cart Validation
+        if (!itemsOrdered) {
+            alert("Please select at least one item to place an order!");
+            return;
+        }
+
+        receiptText += `\n---------------------------\nGrand Total: ₹${grandTotal.toFixed(2)}\n\nThank you for ordering!`;
+        
+        // Final Output Confirmation
+        alert(receiptText);
+        resetForm();
+    }
+
+    function resetForm() {
+        const inputs = document.querySelectorAll('.qty-input');
+        inputs.forEach(input => input.value = "0");
+    }
+</script>
+
+</body>
+</html>
