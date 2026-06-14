@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SanjuAnu Kitchen - Empire Meadows</title>
+    <style>
+        /* Base Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fffdf9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e67e22;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e67e22;
+        }
+
+        /* Hero Showcase Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                        url('https://unsplash.com') no-repeat center center/cover;
+            color: white;
+            padding: 90px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: #f1c40f;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Promotional Offer Tag */
+        .promo-banner {
+            background-color: #27ae60;
+            color: white;
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+            margin-top: 10px;
+        }
+
+        /* Core Values Highlights */
+        .usp-container {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .usp-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .usp-item {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .usp-item span {
+            color: #e67e22;
+            margin-right: 5px;
+        }
+
+        /* Main Menu Content Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #e67e22;
+            margin: 10px auto 0;
+        }
+
+        /* Menu Grid Component */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 200px;
+            background-color: #eaeded;
+            overflow: hidden;
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .food-card h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            color: #e67e22;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .food-card p {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* WhatsApp Call To Action Button */
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
+        }
+
+        /* Information & Rules Layout Sidebar */
+        .info-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            border: 1px solid #eee;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .info-box h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box p, .info-box li {
+            color: #555;
+            font-size: 15px;
+            list-style-position: inside;
+        }
+
+        /* Universal Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Configuration Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Components Layout -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">🍳 SanjuAnu Kitchen</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Our Menu</a></li>
+                <li><a href="#details">Timings & Pickup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Showcase Section -->
+    <section class="hero" id="home">
+        <h1>SanjuAnu Kitchen</h1>
+        <div class="subtitle">Exclusively for Empire Meadows Residents</div>
+        <p>Delicious, home-cooked food prepared fresh and clean in your neighborhood layout.</p>
+        <!-- Dynamic Offer Highlight -->
+        <div class="promo-banner">🎁 FREE 1 Cup Junnu on all orders above ₹300!</div>
+    </section>
+
+    <!-- Selling Point Banner -->
+    <div class="usp-container">
+        <div class="usp-grid">
+            <div class="usp-item"><span>🌿</span> Healthy & Hygienic</div>
+            <div class="usp-item"><span>😋</span> Authentically Tasty</div>
+            <div class="usp-item"><span>💰</span> Highly Affordable</div>
+        </div>
+    </div>
+
+    <!-- Main Grid Menu Area -->
+    <main class="container" id="menu">
+        <h2 class="section-title">Today's Kitchen Menu</h2>
+        
+        <div class="menu-grid">
+
+            <!-- Item 1: KFC Style Chicken -->
+            <div class="food-card">
+                < <div class="image-container">
+                    <img src="kfc.JPG" alt="KFC Style Chicken">
+                </div>
+                <div class="card-details">
+                    <h3>KFC Style Chicken</h3>
+                    <div class="price-tag">100.00</div>
+                    <p>Super crispy, seasoned, deep-fried chicken with our signature crunchy crust.</p>
+                    <a href="file:///F:/OneDrive/Desktop/SanjuAnu%20Kitchen/order.html" target="_blank" class="whatsapp-btn">
+                        Order via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 2: KFC Style Fish -->
+            <div class="food-card">
+                <div class="image-container">
+                    <img src="KFC FISH.JPG" alt="KFC Style Fish">
+                </div>
+                <div class="card-details">
+                    <h3>KFC Style Fish</h3>
+                    <div class="price-tag">100.00</div>
+                    <p>Golden, flaky boneless fish fillets coated in a crunchy, southern-style batter crisp.</p>
+                    <a href="file:///F:/OneDrive/Desktop/SanjuAnu%20Kitchen/order.html" target="_blank" class="whatsapp-btn">
+                        Order via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 3: Nellore Fish Pulusu -->
+            <div class="food-card">
+                <div class="image-container">
+                    <img src="FISH.JPG" alt="Neluru Fish Pulusu">
+                </div>
+                <div class="card-details">
+                    <h3>Neluru Fish Pulusu</h3>
+                    <div class="price-tag">100.00</div>
+                    <p>Authentic Andhra-style spicy fish curry stewed with raw mango and tamarind extract.</p>
+                    <a href="file:///F:/OneDrive/Desktop/SanjuAnu%20Kitchen/order.html" target="_blank" class="whatsapp-btn">
+                        Order via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 4: Chicken Curry -->
+            <div class="food-card">
+                <div class="image-container">
+                    <img src="CHICKEN.JFIF" alt="Chicken Curry">
+                </div>
+                <div class="card-details">
+                    <h3>Chicken Curry</h3>
+                    <div class="price-tag">130.00</div>
+                    <p>Tender chicken slow-cooked in a rich onion-tomato gravy with homestyle ground spices.</p>
+                    <a href="file:///F:/OneDrive/Desktop/SanjuAnu%20Kitchen/order.html" target="_blank" class="whatsapp-btn">
+                        Order via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 5: Egg Curry -->
+            <div class="food-card">
+                <div class="image-container">
+                    <img src="EGG.JFIF" alt="Egg Curry">
+                </div>
+                <div class="card-details">
+                    <h3>Egg Curry</h3>
+                    <div class="price-tag">60.00</div>
+                    <p>Boiled eggs lightly tossed and simmered inside a delicious, seasoned masala base.</p>
+                    <a href="file:///F:/OneDrive/Desktop/SanjuAnu%20Kitchen/order.html" target="_blank" class="whatsapp-btn">
+                        Order via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reward Gift Card Item -->
+            <div class="food-card" style="border: 2px dashed #27ae60; background-color: #f4faf6;">
+                <div class="image-container">
+                    <img src="JUNU.JFIF" alt="Junnu Sweet">
+                </div>
+                <div class="card-details">
+                    <h3>1 Cup Junnu</h3>
+                    <div class="price-tag" style="color: #27ae60;">FREE Reward</div>
+                    <p>Authentic, delicate colostrum milk pudding sweet spiced with pepper powder and cardamoms.</p>
+                    <span class="whatsapp-btn" style="background-color: #27ae60;">Free on Orders > ₹500</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Timings & Operational Information Layout Grid -->
+        <div class="info-section" id="details">
+            <div class="info-box">
+                <h4>⏰ Kitchen Timings</h4>
+                <p><strong>Afternoon Lunch:</strong> 12:00 PM to 3:00 PM</p>
+                <p><strong>Evening Dinner:</strong> 07:00 PM to 10:00 PM</p>
+            </div>
+            <div class="info-box">
+                <h4>📦 Delivery Policy</h4>
+                <ul>
+                    <li>Strictly Customer Pickup only.</li>
+                    <li>Please pick up your warm order directly from our flat below.</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h4>💬 Join Our Group</h4>
+                <p>Stay updated on daily specials! Search for our WhatsApp group: <strong>@SanjuAnu Kitchen</strong></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fixed Footer Container Layout -->
+    <footer>
+        <p>🏡 <strong>Pickup Location:</strong> Flat A1-G4, Empire Meadows</p>
+        <p>📞 <strong>Call/WhatsApp Us:</strong> +91 9603218988</p>
+        <p style="margin-top: 20px; font-size: 13px; color: #bdc3c7;">&copy; 2026 SanjuAnu Kitchen. Prepared with love & hygiene.</p>
+    </footer>
+
+</body>
+</html>
